@@ -25,7 +25,19 @@ const tourSchema = new mongoose.Schema({
   },
 });
 
-const Tour = mongoose.model('Tour',tourSchema);
+const Tour = mongoose.model('Tour', tourSchema);
+
+const testTour = new Tour({
+  name: 'tour 1',
+  duration: 34,
+});
+
+testTour
+  .save()
+  .then((doc) => {
+    console.log(doc);
+  })
+  .catch((err) => console.log('error : ', err));
 
 const port = process.env.PORT || 8000;
 
