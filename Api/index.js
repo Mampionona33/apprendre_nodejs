@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const { getDataBase } = require('./dataBase');
 
 // Parse JSON bodies for this app. Make sure you put
 // `app.use(express.json())` **before** your route handlers!
 app.use(express.json());
+
+const db = getDataBase();
 
 // show user list
 app.get('/listUsers', (req, res) => {
@@ -32,19 +35,24 @@ app.get('/listUsers/:id', (req, res) => {
 // create user
 app.post('/addUser', (req, res) => {
   // First read existing users
+  console.log(db);
   fs.readFile(__dirname + '/' + 'users.json', 'utf-8', (err, data) => {
     data = JSON.parse(data);
     const newData = [...data, req.body];
     console.log(newData);
+
     const writeStream = fs.createWriteStream('output.json');
     writeStream.write(JSON.stringify(newData, null, 2), 'utf8');
     writeStream.end();
+
     writeStream.on('finish', () => {
       console.log('write finish');
     });
+
     writeStream.on('error', (err) => {
       console.log(err.stack);
     });
+
     res.end(JSON.stringify(newData));
   });
 });
