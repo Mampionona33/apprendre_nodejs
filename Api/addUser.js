@@ -2,12 +2,10 @@ const axios = require('axios');
 
 const addUser = async () => {
   const user = {
-    user4: {
-      name: 'mohit',
-      password: 'password4',
-      profession: 'teacher',
-      id: 4,
-    },
+    name: 'mohit',
+    password: 'password4',
+    profession: 'teacher',
+    id: 4,
   };
 
   try {

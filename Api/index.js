@@ -34,9 +34,18 @@ app.post('/addUser', (req, res) => {
   // First read existing users
   fs.readFile(__dirname + '/' + 'users.json', 'utf-8', (err, data) => {
     data = JSON.parse(data);
-    data['user4'] = req.body['user4'];
-    console.log(data);
-    res.end(JSON.stringify(data));
+    const newData = [...data, req.body];
+    console.log(newData);
+    const writeStream = fs.createWriteStream('output.json');
+    writeStream.write(JSON.stringify(newData, null, 2), 'utf8');
+    writeStream.end();
+    writeStream.on('finish', () => {
+      console.log('write finish');
+    });
+    writeStream.on('error', (err) => {
+      console.log(err.stack);
+    });
+    res.end(JSON.stringify(newData));
   });
 });
 
