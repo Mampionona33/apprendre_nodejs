@@ -14,6 +14,21 @@ app.get('/listUsers', (req, res) => {
   });
 });
 
+// get user by id
+app.get('/listUsers/:id', (req, res) => {
+  fs.readFile(__dirname + '/' + 'users.json', 'utf-8', (err, data) => {
+    const id = parseInt(Object.values(req.params).reduce((a, b) => a + b));
+    const result = Object.entries(JSON.parse(data))
+      .map((item) => {
+        return item.filter((elem) => elem.id === id);
+      })
+      .flat();
+
+    console.log(result);
+    res.send(result);
+  });
+});
+
 // create user
 app.post('/addUser', (req, res) => {
   // First read existing users
@@ -25,7 +40,10 @@ app.post('/addUser', (req, res) => {
   });
 });
 
-const server = app.listen(8081, '127.0.0.1', () => {
+const PORT = 8081;
+const Host = '127.0.0.1';
+
+const server = app.listen(PORT, Host, () => {
   const host = server.address().address;
   const port = server.address().port;
   console.log(host);
