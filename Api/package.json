@@ -1,0 +1,26 @@
+{
+  "name": "apprendre_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --watch index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mampionona33/apprendre_nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mampionona33/apprendre_nodejs/issues"
+  },
+  "homepage": "https://github.com/Mampionona33/apprendre_nodejs#readme",
+  "dependencies": {
+    "axios": "^1.1.2",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
