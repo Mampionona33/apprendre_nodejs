@@ -1,20 +1,25 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const fs = require('fs');
-const { getDataBase } = require('./dataBase');
+const { getDataBase, connectToDataBase } = require('./dataBase');
 
 // Parse JSON bodies for this app. Make sure you put
 // `app.use(express.json())` **before** your route handlers!
 app.use(express.json());
 
-const db = getDataBase();
+const router = express.Router();
 
 // show user list
-app.get('/listUsers', (req, res) => {
-  fs.readFile(__dirname + '/' + 'users.json', 'utf-8', (err, data) => {
-    console.log(data);
-    res.send(data);
-  });
+app.get('/listUsers', async (req, res) => {
+  const db = getDataBase();
+  const collection = db.collection('users');
+  console.log(collection.find({}));
+
+  // fs.readFile(__dirname + '/' + 'users.json', 'utf-8', (err, data) => {
+  //   console.log(data);
+  //   res.send(data);
+  // });
 });
 
 // get user by id
@@ -35,7 +40,6 @@ app.get('/listUsers/:id', (req, res) => {
 // create user
 app.post('/addUser', (req, res) => {
   // First read existing users
-  console.log(db);
   fs.readFile(__dirname + '/' + 'users.json', 'utf-8', (err, data) => {
     data = JSON.parse(data);
     const newData = [...data, req.body];
@@ -57,13 +61,22 @@ app.post('/addUser', (req, res) => {
   });
 });
 
-const PORT = 8081;
-const Host = '127.0.0.1';
+const PORT = 8000;
+// const Host = '127.0.0.1';
 
-const server = app.listen(PORT, Host, () => {
-  const host = server.address().address;
+const server = app.listen(PORT, () => {
+  // const host = server.address().address;
   const port = server.address().port;
-  console.log(host);
   console.log(port);
-  console.log('example app listening at http://%s:%s', host, port);
+  console.log('App listening at http://localhost:%s', port);
 });
+
+// start server
+(async () => {
+  try {
+    await connectToDataBase();
+    server;
+  } catch (error) {
+    console.log(error);
+  }
+})();
