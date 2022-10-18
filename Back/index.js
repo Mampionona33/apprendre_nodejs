@@ -6,8 +6,9 @@ server.on('listening', () => {
   console.log('server start on port : %s', PORT);
 });
 server.on('request', (request, response) => {
-  const { method, url } = request;
+  const { method, url, headers } = request;
   console.log('url demandée :%s %s', method, url);
+  console.log('header : %s', headers);
   if (request.url === '/main.css') {
     response.setHeader('Content-Type', 'text/css');
     response.write('body{font-size:18px; color: red;}');
