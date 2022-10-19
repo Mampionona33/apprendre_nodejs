@@ -2,11 +2,10 @@
   "name": "apprendre_nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon -w server.js"
+    "start": "node ./static/stream.js"
   },
   "repository": {
     "type": "git",
@@ -19,13 +18,10 @@
     "url": "https://github.com/Mampionona33/apprendre_nodejs/issues"
   },
   "homepage": "https://github.com/Mampionona33/apprendre_nodejs#readme",
-  "dependencies": {
-    "axios": "^1.1.2",
-    "express": "^4.18.2",
-    "mongoose": "^6.6.5"
-  },
   "devDependencies": {
-    "dotenv": "^16.0.3",
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "find-my-way": "^7.3.1"
   }
 }
