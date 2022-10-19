@@ -1,8 +1,19 @@
 const http = require('http');
+const os = require('os');
+const { exec } = require('child_process');
+const { stdout, stderr } = require('process');
+
+const { username } = os.userInfo();
+const cpu = os.cpus().length;
+
 const server = http.createServer();
 const PORT = 8000;
 server.listen(PORT, 'localhost');
 server.on('listening', () => {
+  console.log(`salut ${username}, cet ordinateur a ${cpu} CPU`);
+  exec('explorer .', (error, stdout, stderr) => {
+    console.log(`start explorer ${stdout.trim()}`);
+  });
   console.log('server start on port : %s', PORT);
 });
 server.on('request', (request, response) => {
