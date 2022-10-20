@@ -22,6 +22,7 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "date-fns": "^2.29.3",
     "find-my-way": "^7.3.1"
   }
 }

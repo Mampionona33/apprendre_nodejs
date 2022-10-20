@@ -1,17 +1,22 @@
 'use strict';
-const router = require('find-my-way')();
-const { createReadStream } = require('fs');
 const { createServer } = require('http');
-const { join } = require('path');
-
-const staticFile = (req, res, params) => {
-  const fileName = join(__dirname, 'files', params.file);
-  createReadStream(fileName).pipe(res);
-};
-
-router.get('/files/:file', staticFile);
-router.head('/files/:file', staticFile);
-
 const server = createServer().listen(4000);
-server.on('listening', () => console.log('server start'));
-server.on('request', (req, res) => router.lookup(req, res));
+const { parse } = require('url');
+const { format } = require('date-fns');
+
+server.on('listening', () => {
+  console.log('server start');
+});
+
+server.on('request', (req, res) => {
+  const { query } = parse(req.url, true);
+  const text = format(new Date(), 'YYYY-MM-DD');
+  if (query === 'svg') {
+    res.setHeader('Content-Type', 'text/html');
+    res.end(`<svg viewBox="0 0 200 100" >
+      <text x="0" y="50">${text}</text>
+    </svg>`);
+  } else {
+    res.end(text);
+  }
+});
