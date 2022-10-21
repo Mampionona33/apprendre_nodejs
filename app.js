@@ -51,8 +51,6 @@ app.get('/api/v1/tours', (req, res) => {
 
 // Read tour by id
 app.get('/api/v1/tours/:id', (req, res) => {
-  console.log(req.params);
-
   const id = parseInt(req.params.id);
   const tour = tours.find((el) => el.id === id);
   // if (id > tours.length)
@@ -92,6 +90,14 @@ app.patch('/api/v1/tours/:id', (req, res) => {
 
 // Delete data
 app.delete('/api/v1/tours/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+
+  if (id > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid ID',
+    });
+  }
   res.status(204).json({
     status: 'success',
     data: {
