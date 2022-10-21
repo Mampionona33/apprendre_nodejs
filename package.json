@@ -2,9 +2,10 @@
   "name": "apprendre_nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -w app.js",
     "start": "node ./static/stream.js"
   },
   "repository": {
@@ -22,6 +23,8 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "date-fns": "^2.29.3",
     "find-my-way": "^7.3.1"
   }
