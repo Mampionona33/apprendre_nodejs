@@ -2,10 +2,10 @@
   "name": "apprendre_nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon -w app.js",
+    "dev": "nodemon -w server.js",
     "start": "node ./static/stream.js"
   },
   "repository": {
