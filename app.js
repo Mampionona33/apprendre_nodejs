@@ -25,6 +25,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// serving static file from folder
+app.use(express.static(`${__dirname}/public`));
+
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
