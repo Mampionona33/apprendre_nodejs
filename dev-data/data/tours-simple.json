@@ -1,7 +1,8 @@
 [
   { "id": 1, "name": "tour 1", "duration": 50 },
   { "id": 2, "name": "tour 2", "duration": 100 },
-  { "id": 3, "name ": "tour 3", "duration": 30 },
-  { "id": 4, "name ": "tour 4", "duration": 20 },
-  { "id": 5, "name ": "tour 5" }
+  { "id": 3, "name": "tour 3", "duration": 30 },
+  { "id": 4, "name": "tour 4", "duration": 20 },
+  { "id": 5, "name": "tour 5" },
+  { "id": 6, "name": "tour 6", "duration": 51 }
 ]
