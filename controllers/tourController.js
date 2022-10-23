@@ -4,7 +4,7 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 );
 
-exports.checkID = (req, res, next, val) => {
+exports.checkID = (req, res, next) => {
   if (parseInt(req.params.id) > tours.length) {
     return res.status(404).json({
       status: 'fail',
@@ -15,9 +15,21 @@ exports.checkID = (req, res, next, val) => {
 };
 
 exports.checkBody = (req, res, next) => {
+  const name = req.body.name;
+  const duration = req.body.duration;
+  if (!name) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Tour must have name',
+    });
+  }
+  console.log(name);
+  next();
+};
+
+exports.uniqueName = (req, res, next) => {
   const newName = req.body.name;
   const tourExist = tours.filter((el) => el.name === newName);
-  // console.log(tourExist.length);
   if (tourExist.length > 0) {
     return res.status(404).json({
       status: 'fail',
