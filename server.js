@@ -13,32 +13,6 @@ mongoose
   })
   .then(() => console.log('DB connection successful'));
 
-const tourSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'A tour must have a name'],
-    unique: true,
-  },
-  duration: {
-    type: Number,
-    required: [true, 'A tour must have a duration'],
-  },
-});
-
-const Tour = mongoose.model('Tour', tourSchema);
-
-const testTour = new Tour({
-  name: 'tour 1',
-  duration: 34,
-});
-
-testTour
-  .save()
-  .then((doc) => {
-    console.log(doc);
-  })
-  .catch((err) => console.log('error : ', err));
-
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
