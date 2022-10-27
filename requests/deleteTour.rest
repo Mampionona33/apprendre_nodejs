@@ -1,0 +1,7 @@
+DELETE  http://localhost:8000/api/v1/tours/63559868c3d060131467740b HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"tour 1",
+    "duration":51
+}
