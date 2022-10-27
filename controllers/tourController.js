@@ -17,27 +17,39 @@ exports.createTour = async (req, res) => {
   }
 };
 
-exports.getTourById = (req, res) => {
-  // const id = parseInt(req.params.id, 10);
-  // const tour = tours.find((el) => el.id === id);
+exports.getTourById = async (req, res) => {
+  try {
+    const tour = await Tour.findById(req.params.id);
 
-  res.status(200).json({
-    status: 'success',
-    // data: {
-    //   tours: tour,
-    // },
-  });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        tours: tour,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'fail',
+      message: error.message,
+    });
+  }
 };
 
-exports.getAllTours = (req, res) => {
-  // Callin requestTime middleware
-  res.status(200).json({
-    status: 'success',
-    // results: tours.length,
-    // data: {
-    //   tours,
-    // },
-  });
+exports.getAllTours = async (req, res) => {
+  try {
+    const tours = await Tour.find();
+    res.status(200).json({
+      status: 'success',
+      data: {
+        tours: tours,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'fail',
+      message: error.message,
+    });
+  }
 };
 
 exports.updateTour = (req, res) => {
