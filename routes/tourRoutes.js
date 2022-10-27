@@ -9,11 +9,7 @@ const router = express.Router();
 router
   .route('/')
   .get(tourController.getAllTours)
-  .post(
-    tourController.checkBody,
-    tourController.uniqueName,
-    tourController.createTour
-  );
+  .post(tourController.createTour);
 router
   .route('/:id')
   .get(tourController.getTourById)
